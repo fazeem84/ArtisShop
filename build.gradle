@@ -1,6 +1,7 @@
 buildscript {
-    repositories {
-        mavenCentral()
+   repositories {
+    	mavenLocal()
+    	mavenCentral()    	
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
@@ -9,25 +10,33 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
+apply plugin: 'spring-boot'
+apply plugin : 'war'
 
-jar {
-    baseName = 'ArtistShop'
-   // version = '0.1.0'
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+version = '1.0'
+war {
+	manifest {
+		attributes 'Implementation-Title': 'ArtistShop',
+				   'Implementation-Version': version
+	}
 }
-
 repositories {
-    mavenCentral()
+	mavenCentral()
+	jcenter()	
 }
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-rest")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    //compile("org.springframework.boot:spring-boot-starter-data-jpa:1.3.5.RELEASE")
+	//compile("org.springframework.boot:spring-boot-starter-security:1.3.5.RELEASE")
     compile("com.h2database:h2")
-    compile("org.codehaus.jackson:jackson-mapper-asl")
-    testCompile("org.springframework.boot:spring-boot-starter-test")
+   // compile("mysql:mysql-connector-java")
+    compile("com.fasterxml.jackson.core:jackson-databind:2.6.3") 
+    //testCompile("org.springframework.boot:spring-boot-starter-test")
+    compile("org.springframework.boot:spring-boot-starter-web:1.3.5.RELEASE")
+	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 }

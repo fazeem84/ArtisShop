@@ -42,6 +42,8 @@ public class ArtistShopController {
 		      stream.close();
 		      Item item = mapper.readValue(inputJson, Item.class);
 		      System.out.println("item =====>>>"+item);
+		      String loc=filepath;
+		      item.setLocation(loc);
 		      itemRepository.save(item);
 		    }
 		    catch (Exception e) {
