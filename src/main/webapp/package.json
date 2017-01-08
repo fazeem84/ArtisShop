@@ -1,0 +1,30 @@
+{
+    "name": "artistJinu",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.html",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+    "artistJinu"
+  ],
+    "author": "nidhin",
+    "license": "ISC",
+    "devDependencies": {
+        "gulp": "latest",
+        "gulp-concat": "latest",
+        "gulp-connect": "latest",
+        "gulp-sass": "^3.0.0",
+        "gulp-uglify": "latest"
+    },
+    "dependencies": {
+        "angular": "latest",
+        "angular-animate": "latest",
+        "angular-aria": "^1.6.0",
+        "angular-material": "latest",
+        "angular-ui-router": "latest",
+        "bootstrap": "latest",
+        "font-awesome": "latest"
+    }
+}
