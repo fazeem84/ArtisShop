@@ -17,6 +17,9 @@ public class Item {
 	private String category;
 	private String price;
 	private String location;
+	private String medium;
+	private String  artistName;
+	
 	public long getId() {
 		return id;
 	}
@@ -53,11 +56,25 @@ public class Item {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+	public String getMedium() {
+		return medium;
+	}
+	public void setMedium(String medium) {
+		this.medium = medium;
+	}
+	public String getArtistName() {
+		return artistName;
+	}
+	public void setArtistName(String artistName) {
+		this.artistName = artistName;
+	}
 	@Override
 	public String toString() {
 		return "Item [id=" + id + ", name=" + name + ", description=" + description + ", category=" + category
-				+ ", price=" + price + ", location=" + location + "]";
+				+ ", price=" + price + ", location=" + location + ", medium=" + medium + ", artistName=" + artistName
+				+ "]";
 	}
+	
 	
 	
 	
