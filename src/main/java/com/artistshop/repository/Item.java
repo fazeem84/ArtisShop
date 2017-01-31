@@ -19,6 +19,7 @@ public class Item {
 	private String location;
 	private String medium;
 	private String  artistName;
+	private boolean  show;
 	
 	public long getId() {
 		return id;
@@ -68,14 +69,19 @@ public class Item {
 	public void setArtistName(String artistName) {
 		this.artistName = artistName;
 	}
+
+	public boolean isShow() {
+		return show;
+	}
+	public void setShow(boolean show) {
+		this.show = show;
+	}
 	@Override
 	public String toString() {
 		return "Item [id=" + id + ", name=" + name + ", description=" + description + ", category=" + category
 				+ ", price=" + price + ", location=" + location + ", medium=" + medium + ", artistName=" + artistName
-				+ "]";
+				+ ", show=" + show + "]";
 	}
-	
-	
 	
 	
 }

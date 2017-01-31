@@ -36,10 +36,36 @@
                 <a class="thumbnail" ng-href="{{item.url}}" data-position="left center">
                     <img ng-src="{{item.url}}" alt="" />
                 </a>
-                <h2>{{item.artist}}</h2>
-                <p>{{item.description}}</p>
+                <div class="description">
+                    <div class="info">
+                        <div class="name">{{item.name}}</div>
+                        <div class="details">
+                            <table>
+                                <tr>
+                                    <td style="color: #dadada;padding-right:5px;">Artist Name : </td>
+                                    <td>{{item.artistName}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #dadada;padding-right:5px;">Category : </td>
+                                    <td>{{item.category}},</td>
+                                    <td style="color: #dadada;padding-left:5px;padding-right:5px;">Medium : </td>
+                                    <td>{{item.medium}} </td>
+                                </tr>
+                                <tr>
+                                    <td style="color: #dadada;padding-right:5px;">Description : </td>
+                                    <td> {{item.description}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="price">
+                        <span class="amount">{{item.price | currency:'&#8377'}}</span>
+                        <span class="interest" ng-click="vm.showInterest(item);">Show Interest</span>
+                    </div>
+                </div>
+
             </article>
-         
+
         </section>
 
         <!-- Footer -->
@@ -57,10 +83,55 @@
         </footer>
 
     </div>
+    <div id="myModal" class="pop-up">
+        <!-- Modal content -->
+        <div class="pop-up-container" ng-show="vm.showForm">
+            <div class="pop-up-header">
+                <div>
+                    <span class='name'> {{vm.popData.name}} </span>
+                    <i>({{vm.popData.artistName}})</i>
+                    <span class='amount'>{{vm.popData.price | currency:'&#8377'}}</span>
+                </div>
+            </div>
+            <div class="pop-up-body">
+                <form ng-submit="vm.save();">
+                    <div class="input-box">
+                        <label>Name
+                            <req>*</req>
+                        </label>
+                        <input type="text" ng-model="vm.formData.name" required placeholder="Enter your name" ng-disabled="vm.saving" />
+                    </div>
+                    <div class="input-box">
+                        <label>Email - ID
+                            <req>*</req>
+                        </label>
+                        <input type="text" ng-model="vm.formData.email" required placeholder="Enter your email" ng-disabled="vm.saving" />
+                    </div>
+                    <div class="input-box">
+                        <label>Contact Number
+                            <req>*</req>
+                        </label>
+                        <input type="text" ng-model="vm.formData.phone" required placeholder="Enter contact number" ng-disabled="vm.saving" />
+                    </div>
+                    <div style="text-align:center">
+                        <button type="submit" ng-disabled="vm.saving" style="padding:12px 24px;text-align:center;cursor:pointer;">
+                            <b>{{vm.buttonText}}</b>
+                        </button>
+                    </div>
+                    <div style="clear:both;"></div>
+                </form>
+            </div>
+        </div>
+        <div class="pop-up-container" ng-hide="vm.showForm">
+            <div class="pop-up-header"></div>
+            <div class="pop-up-body"></div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="assets/js/angular.min.js"></script>
-    <script src="assets/js/app.js"></script>
+    <script src="app.js"></script>
+    <script src="app.config.js"></script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/skel.min.js"></script>
     <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->

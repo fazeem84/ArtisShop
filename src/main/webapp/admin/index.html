@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Artist Jinu</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Scripts -->
+    <script src="../assets/js/angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="app.config.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="admin.css">
+
+    <script type="text/javascript">
+        // function to validate input field accepts only numbers
+        function validNumber(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+
+<body ng-app="artist-admin" ng-controller="mainController as vm">
+
+    <!-- Header Section -->
+    <header>
+        <span>{{vm.appTitle}}</span>
+    </header>
+
+    <!-- Navigation -->
+    <div class="nav">
+        <span ng-class="(vm.showForm) ? 'active' : ''" ng-click="vm.showForm = true;">Create Item</span>
+        <span ng-class="(!vm.showForm) ? 'active' : ''" ng-click="vm.loadList();">List all Items</span>
+    </div>
+
+    <!-- Form to upload a new image -->
+    <div class="admin-form" ng-show="vm.showForm">
+        <form ng-submit="vm.save();">
+
+            <div class="input-box">
+                <label>Image Title
+                    <req>*</req>
+                </label>
+                <input type="text" ng-model="vm.formData.name" required placeholder="Enter image title" ng-disabled="vm.saving" />
+            </div>
+            <div class="input-box">
+                <label>Artist Name
+                    <req>*</req>
+                </label>
+                <input type="text" ng-model="vm.formData.artistName" required placeholder="Enter artist name" ng-disabled="vm.saving" />
+            </div>
+            <div class="input-box">
+                <label>Image Description
+                    <req>*</req>
+                </label>
+                <input type="text" ng-model="vm.formData.description" required placeholder="Enter image description" ng-disabled="vm.saving" />
+            </div>
+            <div class="input-box">
+                <label>Image Category
+                    <req>*</req>
+                </label>
+                <select class="form-control" data-ng-model="vm.formData.category" required style="width:100%;" ng-disabled="vm.saving">
+                    <option value="">Select Image Category</option>
+                    <option value="{{item.value}}" ng-repeat="item in vm.imageCategory">{{item.value}}</option>
+                </select>
+            </div>
+            <div class="input-box">
+                <label>Image Medium
+                    <req>*</req>
+                </label>
+                <select class="form-control" data-ng-model="vm.formData.medium" required style="width:100%;" ng-disabled="vm.saving">
+                    <option value="">Select Image Medium</option>
+                    <option value="{{item.value}}" ng-repeat="item in vm.imageMedium">{{item.value}}</option>
+                </select>
+            </div>
+            <div class="input-box">
+                <label>Image Amount
+                    <req>*</req>
+                </label>
+                <input type="text" onkeypress="return validNumber(event);" ng-model="vm.formData.price" required placeholder="Enter amount" ng-disabled="vm.saving" />
+            </div>
+            <div class="input-box">
+                <label>Image File
+                    <req>*</req>
+                </label>
+                <input type="file" id="imageFile" onchange="angular.element(this).scope().vm.FilesSelection(this);" style="padding: 10px;height: auto;" required ng-disabled="vm.saving">
+            </div>
+            <div style="text-align:center">
+                <button type="submit" ng-disabled="vm.saving" style="padding:4px 12px;text-align:center;cursor:pointer;">
+                    <b>{{vm.buttonText}}</b>
+                </button>
+            </div>
+            <div style="clear:both;"></div>
+
+        </form>
+    </div>
+
+    <!-- List all images -->
+    <div class="admin-form imageList" ng-hide="vm.showForm">
+
+        <div ng-show="vm.listLoading" class="loading">Loading</div>
+
+        <table class="table table-bordered" ng-hide="vm.listLoading" border="1">
+            <th class="">Image Title</th>
+            <th class="">Artist</th>
+            <th class="">Category</th>
+            <th class="">Price</th>
+            <th class="">Show</th>
+            <tr ng-repeat="image in vm.imageList | orderBy:image.id">
+                <td class="">{{image.name}}</td>
+                <td class="">{{image.artistName}}</td>
+                <td class="">{{image.category}}</td>
+                <td class="">{{image.price}}</td>
+                <td class="">{{image.show}}</td>
+            </tr>
+            <tr ng-show="vm.imageList.length == 0">
+                <td colspan="5" style="text-align:center;padding : 8px;"> List is empty.</td>
+            </tr>
+        </table>
+
+    </div>
+</body>
+
+</html>

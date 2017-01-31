@@ -386,6 +386,9 @@ var main = (function ($) {
          */
         initViewer: function (slideNo) {
 
+            if (typeof slideNo == 'undefined')
+                return;
+
             // Bind thumbnail click event.
             _.$thumbnails
                 .on('click', '.thumbnail', function (event) {
@@ -469,7 +472,8 @@ var main = (function ($) {
                     $thumbnail.data('index', _.slides.length - 1);
 
                 });
-            if (slideNo)
+
+            if (typeof slideNo != 'undefined')
                 _.switchTo(slideNo)
         },
 
@@ -520,7 +524,9 @@ var main = (function ($) {
          * @param {integer} index Index.
          */
         switchTo: function (index, noHide) {
-debugger
+            if (_.slides.length == 0)
+                return;
+
             // Already at index and xsmall isn't active? Bail.
             if (_.current == index && !skel.breakpoint('xsmall').active)
                 return;
