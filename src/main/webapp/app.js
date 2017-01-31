@@ -79,7 +79,12 @@
             vm.showForm = true;
             showPopUp(item, true)
         };
-
+        /**
+        *
+        */
+        vm.sendInterest = function (){
+        debugger
+        }
 
     };
 })();

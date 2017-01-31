@@ -94,7 +94,7 @@
                 </div>
             </div>
             <div class="pop-up-body">
-                <form ng-submit="vm.save();">
+                <form ng-submit="vm.sendInterest();">
                     <div class="input-box">
                         <label>Name
                             <req>*</req>
@@ -105,7 +105,7 @@
                         <label>Email - ID
                             <req>*</req>
                         </label>
-                        <input type="text" ng-model="vm.formData.email" required placeholder="Enter your email" ng-disabled="vm.saving" />
+                        <input type="email" ng-model="vm.formData.email" required placeholder="Enter your email" ng-disabled="vm.saving" />
                     </div>
                     <div class="input-box">
                         <label>Contact Number
