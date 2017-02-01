@@ -6,7 +6,8 @@
         lang: "en", // app default locale format
         baseURL: '', // app service URL
         requestURL: {
-            list: 'item'
+            list: 'item',
+            sendMail : 'sendMail'
         }
     });
 

@@ -19,13 +19,11 @@
                 method: 'GET',
                 url: appConfig.baseURL + appConfig.requestURL.list
             }).then(function successCallback(response) { // success callback
-
-                vm.imageList = response.data._embedded.item;
-                for (var i = 0; i < vm.imageList.length; i++) {
-                    if (!vm.imageList[i].show) {
-                        delete vm.imageList[i];
-                    } else {
-                        vm.imageList[i].url = appConfig.baseURL + 'files/' + vm.imageList[i].id;
+                var list = response.data._embedded.item;
+                for (var i = 0; i < list.length; i++) {
+                    if (list[i].show) {
+                        list[i].url = appConfig.baseURL + 'files/' + list[i].id;
+                        vm.imageList.push(list[i]);
                     }
                 }
 
@@ -50,13 +48,13 @@
             }
 
             // When the user clicks on <span> (x), close the modal
-            /*$('.pop-up-close')[0].onclick = function () {
+            $('.pop-up-close')[0].onclick = function () {
                 $('#myModal').fadeOut();
                 if (showForm) {
-                            vm.popData = undefined;
-                            vm.showForm = false;
-                        }
-            }*/
+                    vm.popData = undefined;
+                    vm.showForm = false;
+                }
+            }
 
             // When the user clicks anywhere outside of the modal, close it
             window.onclick = function (event) {
@@ -80,10 +78,23 @@
             showPopUp(item, true)
         };
         /**
-        *
-        */
-        vm.sendInterest = function (){
-        debugger
+         *
+         */
+        vm.sendInterest = function () {
+            if (!vm.formData.comments)
+                vm.formData.comments = null;
+
+            vm.formData.itemID = vm.popData.id;
+
+            $http({ // AJAX request 'POST'
+                method: 'POST',
+                url: appConfig.baseURL + appConfig.requestURL.sendMail,
+                data: vm.formData
+            }).then(function successCallback(response) { // success callback
+
+            }, function errorCallback(response) { // error callback
+
+            });
         }
 
     };

@@ -19,7 +19,12 @@
             vm.buttonText = "Save";
             vm.showForm = true;
         }
-
+        /**
+         *
+         */
+        vm.login = function () {
+            
+        };
         /**
          * function to handle save logic
          */
@@ -27,8 +32,13 @@
             vm.saving = true; // set sthe saving flag to true to disable all inputs
             vm.buttonText = "Saving ... "; // sets the button text
 
+            if (vm.editMode) {
+                vm.updateDetails(vm.formData);
+                return;
+            }
             var fd = new FormData(); // form data object
             fd.append("uploadfile", vm.file); // file object
+
             var inputJSON = { // other form fields
                 name: vm.formData.name,
                 description: vm.formData.description,
@@ -97,6 +107,39 @@
 
             });
 
-        }
+        };
+        /**
+         *
+         */
+        vm.editDetails = function (item) {
+            vm.editMode = true;
+            vm.formData = item;
+            vm.showForm = true;
+        };
+        /**
+         *
+         */
+        vm.updateDetails = function (item) {
+            if (!vm.editMode)
+                item.show = !item.show;
+
+            $http({ // AJAX request 'POST'
+                method: 'PUT',
+                url: adminConfig.baseURL + adminConfig.requestURL.list + '/' + item.id,
+                data: item
+            }).then(function successCallback(response) { // success callback
+                if (vm.editMode) {
+                    alert('Data Saved Successfully !!');
+                    vm.formData = {}; // resets form fields
+                    vm.saving = false; // unsets the flag
+                    vm.buttonText = "Save"; // button text
+                    vm.listLoaded = false; // to reload the list
+                    vm.editMode = false;
+                }
+
+            }, function errorCallback(response) { // error callback
+
+            });
+        };
     };
 })();

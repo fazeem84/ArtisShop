@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.artistshop.repository.Item;
 import com.artistshop.repository.ItemRepository;
+import com.artistshop.request.SendMail;
+//import com.artistshop.service.EmailNotifier;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
@@ -86,6 +89,14 @@ public class ArtistShopController {
 	        
 	        IOUtils.copy(is, response.getOutputStream());
 	        response.flushBuffer();
+	    }
+	    
+	    @RequestMapping(value = "/sendMail", method = RequestMethod.POST)
+	    public void sendMail(@RequestBody SendMail SendMail) throws IOException {
+	    	String msg="Item"+SendMail.itemID+" has requested by "+SendMail.name;
+	    	System.out.println(msg);
+	    	//new EmailNotifier().sendMail(msg);
+	    	
 	    }
 
 }

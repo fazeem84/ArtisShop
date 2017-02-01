@@ -111,7 +111,12 @@
                         <label>Contact Number
                             <req>*</req>
                         </label>
-                        <input type="text" ng-model="vm.formData.phone" required placeholder="Enter contact number" ng-disabled="vm.saving" />
+                        <input type="text" ng-model="vm.formData.contactNumber" required placeholder="Enter contact number" ng-disabled="vm.saving" />
+                    </div>
+                    <div class="input-box">
+                        <label>Comments
+                        </label>
+                        <input type="text" ng-model="vm.formData.comments" placeholder="Enter comments" ng-disabled="vm.saving" />
                     </div>
                     <div style="text-align:center">
                         <button type="submit" ng-disabled="vm.saving" style="padding:12px 24px;text-align:center;cursor:pointer;">
@@ -121,6 +126,7 @@
                     <div style="clear:both;"></div>
                 </form>
             </div>
+            <div class="pop-up-close"></div>
         </div>
         <div class="pop-up-container" ng-hide="vm.showForm">
             <div class="pop-up-header"></div>

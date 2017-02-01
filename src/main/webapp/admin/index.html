@@ -39,7 +39,31 @@
         <span ng-class="(vm.showForm) ? 'active' : ''" ng-click="vm.showForm = true;">Create Item</span>
         <span ng-class="(!vm.showForm) ? 'active' : ''" ng-click="vm.loadList();">List all Items</span>
     </div>
-
+<!--
+      Form to log in 
+    <div class="login-form" ng-hide="vm.loggedIn">
+        <form ng-submit="vm.login();">
+            <div class="input-box">
+                <label>Username
+                    <req>*</req>
+                </label>
+                <input type="text" ng-model="vm.username" required placeholder="Enter image title" ng-disabled="vm.saving" />
+            </div>
+            <div class="input-box">
+                <label>Password
+                    <req>*</req>
+                </label>
+                <input type="password" ng-model="vm.password" required placeholder="Enter artist name" ng-disabled="vm.saving" />
+            </div>            
+            <div style="text-align:center">
+                <button type="submit" ng-disabled="vm.saving" style="padding:4px 12px;text-align:center;cursor:pointer;">
+                    <b>Login</b>
+                </button>
+            </div>
+            <div style="clear:both;"></div>
+        </form>
+    </div>-->
+    
     <!-- Form to upload a new image -->
     <div class="admin-form" ng-show="vm.showForm">
         <form ng-submit="vm.save();">
@@ -86,11 +110,11 @@
                 </label>
                 <input type="text" onkeypress="return validNumber(event);" ng-model="vm.formData.price" required placeholder="Enter amount" ng-disabled="vm.saving" />
             </div>
-            <div class="input-box">
+            <div class="input-box" ng-hide="vm.editMode">
                 <label>Image File
                     <req>*</req>
                 </label>
-                <input type="file" id="imageFile" onchange="angular.element(this).scope().vm.FilesSelection(this);" style="padding: 10px;height: auto;" required ng-disabled="vm.saving">
+                <input type="file" id="imageFile" onchange="angular.element(this).scope().vm.FilesSelection(this);" style="padding: 10px;height: auto;" ng-required="!vm.editMode" ng-disabled="vm.saving">
             </div>
             <div style="text-align:center">
                 <button type="submit" ng-disabled="vm.saving" style="padding:4px 12px;text-align:center;cursor:pointer;">
@@ -114,11 +138,11 @@
             <th class="">Price</th>
             <th class="">Show</th>
             <tr ng-repeat="image in vm.imageList | orderBy:image.id">
-                <td class="">{{image.name}}</td>
+                <td class=""><span ng-click="vm.editDetails(image);">{{image.name}}</span></td>
                 <td class="">{{image.artistName}}</td>
                 <td class="">{{image.category}}</td>
                 <td class="">{{image.price}}</td>
-                <td class="">{{image.show}}</td>
+                <td class="" ng-click="vm.updateDetails(image);">{{image.show}}</td>
             </tr>
             <tr ng-show="vm.imageList.length == 0">
                 <td colspan="5" style="text-align:center;padding : 8px;"> List is empty.</td>
