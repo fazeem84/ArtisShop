@@ -18,12 +18,16 @@
             vm.imageMedium = adminConfig.imageMedium; // data for image medium drop-down           
             vm.buttonText = "Save";
             vm.showForm = true;
+            vm.loggedIn = false;
         }
         /**
          *
          */
         vm.login = function () {
-            
+            debugger
+            if (vm.username && atob(adminConfig.appUser) == vm.username && vm.password && atob(adminConfig.appPass) == vm.password){
+                vm.loggedIn = true;
+            }
         };
         /**
          * function to handle save logic

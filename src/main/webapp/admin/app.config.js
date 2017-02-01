@@ -4,6 +4,8 @@
         appTitle : 'Jinu',
         lang: "en", // app default locale format
         baseURL: '/', // app service URL
+        appUser : 'amludQ==',
+        appPass : 'YWRtaW5AamludTEyMw==',
         requestURL: {
             save: 'createItem',
             list : 'item'

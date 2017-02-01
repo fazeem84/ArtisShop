@@ -1282,6 +1282,7 @@ body.is-loading-2 #viewer .slide {
 }
 .input-box {
     padding-bottom: 15px;
+    color: #444;
 }
 .req-indicator {
     font-size: 12px;
