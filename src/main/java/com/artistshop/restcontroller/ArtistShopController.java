@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.artistshop.exception.ArtistException;
 import com.artistshop.repository.Item;
 import com.artistshop.repository.ItemRepository;
 import com.artistshop.request.SendMail;
@@ -39,7 +40,7 @@ public class ArtistShopController {
 	Logger logger = Logger.getLogger(ArtistShopController.class);	@Autowired
 	ItemRepository itemRepository;
 	@RequestMapping(value = "/createItem", method = RequestMethod.POST)
-	public void uploadFile(@RequestParam("uploadfile") MultipartFile uploadfile,@RequestParam("inputJSON") String inputJson){
+	public void uploadFile(@RequestParam("uploadfile") MultipartFile uploadfile,@RequestParam("inputJSON") String inputJson) throws ArtistException{
 		logger.info(inputJson);
 		ObjectMapper mapper = new ObjectMapper();
 		 try {
@@ -62,7 +63,7 @@ public class ArtistShopController {
 		    }
 		    catch (Exception e) {
 		      logger.info(e.getMessage());
-		     // return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		     throw new ArtistException("Not Able to save the image "+e.getMessage());
 		    }
 		
 	}
