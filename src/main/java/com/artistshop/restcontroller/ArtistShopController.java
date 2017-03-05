@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -35,11 +36,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ArtistShopController {
 	@Autowired
 	  private Environment env;
-	@Autowired
+	Logger logger = Logger.getLogger(ArtistShopController.class);	@Autowired
 	ItemRepository itemRepository;
 	@RequestMapping(value = "/createItem", method = RequestMethod.POST)
 	public void uploadFile(@RequestParam("uploadfile") MultipartFile uploadfile,@RequestParam("inputJSON") String inputJson){
-		System.out.println(inputJson);
+		logger.info(inputJson);
 		ObjectMapper mapper = new ObjectMapper();
 		 try {
 		      // Get the filename and build the local file path
@@ -54,13 +55,13 @@ public class ArtistShopController {
 		      stream.write(uploadfile.getBytes());
 		      stream.close();
 		      Item item = mapper.readValue(inputJson, Item.class);
-		      System.out.println("item =====>>>"+item);
+		      logger.info("item =====>>>"+item);
 		      String loc=filepath;
 		      item.setLocation(loc);
 		      itemRepository.save(item);
 		    }
 		    catch (Exception e) {
-		      System.out.println(e.getMessage());
+		      logger.info(e.getMessage());
 		     // return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		    }
 		
@@ -94,7 +95,7 @@ public class ArtistShopController {
 	    @RequestMapping(value = "/sendMail", method = RequestMethod.POST)
 	    public void sendMail(@RequestBody SendMail SendMail) throws IOException {
 	    	String msg="Item"+SendMail.itemID+" has requested by "+SendMail.name;
-	    	System.out.println(msg);
+	    	logger.info(msg);
 	    	//new EmailNotifier().sendMail(msg);
 	    	
 	    }
