@@ -9,7 +9,7 @@ node{
           } else {
               bat 'gradlew.bat clean build'
           }
-          archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+          archiveArtifacts artifacts: 'build/libs/**/*.*', fingerprint: true
    }
 
 }
