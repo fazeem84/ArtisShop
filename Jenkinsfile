@@ -6,6 +6,7 @@ node{
        echo 'pipeline'
        gradle{
           tasks ('clean')
+          tasks ('build')
        }
    }
 
