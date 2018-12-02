@@ -4,6 +4,9 @@ node{
    }
    stage('build'){
        echo 'pipeline'
+       gradle{
+          tasks ('clean')
+       }
    }
 
 }
