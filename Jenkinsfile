@@ -4,10 +4,11 @@ node{
    }
    stage('build'){
        echo 'pipeline'
-       gradle{
-          tasks ('clean')
-          tasks ('build')
-       }
+       if (isUnix()) {
+              sh './gradlew clean build'
+          } else {
+              bat 'gradlew.bat clean build'
+          }
    }
 
 }
